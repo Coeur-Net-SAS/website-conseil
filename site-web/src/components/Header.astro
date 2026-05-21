@@ -1,0 +1,46 @@
+---
+const navItems = [
+  { label: 'Accueil',      href: '/' },
+  { label: 'Expertise',    href: '/expertise' },
+  { label: 'Réalisations', href: '/realisations' },
+  { label: 'Blog',         href: '/blog' },
+  { label: 'À propos',     href: '/a-propos' },
+];
+
+const currentPath = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+---
+
+<header class="border-b border-brand-700 bg-black/80 backdrop-blur sticky top-0 z-40">
+  <div class="container-page flex items-center justify-between py-4">
+    <a href="/" class="flex items-center gap-2 text-white font-semibold text-lg">
+      <img src="/coeurnetlogo.png" alt="Logo Conseil" class="h-7 w-7 rounded" />
+      <span>Coeur-Net Conseil</span>
+    </a>
+
+    <nav aria-label="Navigation principale">
+      <ul class="hidden md:flex items-center gap-7 text-sm">
+        {navItems.map(({ label, href }) => (
+          <li>
+            <a
+              href={href}
+              class:list={[
+                'hover:text-accent-500',
+                isActive(href) ? 'text-accent-500 font-medium' : 'text-brand-300'
+              ]}
+            >
+              {label}
+            </a>
+          </li>
+        ))}
+        <li>
+          <a href="/contact" class="btn-primary !py-2 !px-4">Contact</a>
+        </li>
+      </ul>
+
+      <!-- Menu mobile minimaliste : lien Contact uniquement, le reste sera ameliore plus tard -->
+      <a href="/contact" class="md:hidden btn-primary !py-2 !px-4 text-sm">Contact</a>
+    </nav>
+  </div>
+</header>

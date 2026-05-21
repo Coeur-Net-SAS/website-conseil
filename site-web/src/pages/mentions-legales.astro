@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Mentions légales">
+  <section class="border-b border-brand-700">
+    <div class="container-page py-12">
+      <h1 class="text-4xl font-bold">Mentions légales</h1>
+    </div>
+  </section>
+
+  <section>
+    <div class="container-prose py-12 text-brand-200 leading-relaxed space-y-6">
+      <div>
+        <h2 class="text-xl font-semibold text-white">Éditeur du site</h2>
+        <p class="mt-2">
+          [Raison sociale] — [Forme juridique] au capital de [montant] €<br />
+          Siège social : [adresse complète]<br />
+          SIREN : [numéro] · TVA intracommunautaire : [numéro]<br />
+          Directeur de la publication : [nom]<br />
+          Contact : <a href="/contact" class="text-accent-500 hover:underline">formulaire de contact</a>
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-white">Hébergement</h2>
+        <p class="mt-2">[Nom de l'hébergeur] — [adresse de l'hébergeur]</p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-white">Propriété intellectuelle</h2>
+        <p class="mt-2">
+          Les contenus présents sur ce site (textes, illustrations, code) sont protégés par le
+          droit d'auteur. Toute reproduction sans autorisation préalable est interdite.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

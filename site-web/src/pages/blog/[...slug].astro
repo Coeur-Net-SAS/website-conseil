@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+// getStaticPaths génère une page par article au moment du build
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
+
+// Convention : cover dans le frontmatter, sinon /images/blog/<slug>.jpg
+const cover = post.data.cover ?? `/images/blog/${post.slug}.jpg`;
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+
+  <article>
+    <header class="border-b border-brand-700">
+      <div class="container-prose py-12">
+        <div class="flex flex-wrap gap-1.5">
+          {post.data.tags.map((tag) => (
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-brand-800/60 text-brand-200 border border-brand-700">{tag}</span>
+          ))}
+        </div>
+        <h1 class="mt-4 text-3xl sm:text-4xl font-bold leading-tight">{post.data.title}</h1>
+        <p class="mt-4 text-lg text-brand-300">{post.data.description}</p>
+        <div class="mt-6 flex items-center gap-3 text-sm text-brand-400">
+          <span>{post.data.author}</span>
+          <span>·</span>
+          <time datetime={post.data.publishDate.toISOString()}>
+            {formatDate(post.data.publishDate)}
+          </time>
+        </div>
+      </div>
+    </header>
+
+    <div class="container-prose pt-10">
+      <img
+        src={cover}
+        alt={`Couverture de l'article : ${post.data.title}`}
+        loading="eager"
+        decoding="async"
+        width="1200"
+        height="630"
+        class="w-full aspect-[16/8.4] rounded-lg border border-brand-700 object-cover bg-brand-800/60"
+      />
+    </div>
+
+    <div class="container-prose py-12">
+      <div class="article-body max-w-none">
+        <Content />
+      </div>
+    </div>
+
+    <footer class="border-t border-brand-700">
+      <div class="container-prose py-10 flex flex-wrap items-center justify-between gap-4">
+        <a href="/blog" class="text-accent-500 font-medium hover:underline">← Retour au blog</a>
+        <a href="/contact" class="btn-primary">Discuter de cet article</a>
+      </div>
+    </footer>
+  </article>
+
+</BaseLayout>

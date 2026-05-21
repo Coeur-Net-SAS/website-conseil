@@ -1,0 +1,33 @@
+stages:
+  - build
+  - push
+
+variables:
+  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  IMAGE_LATEST: $CI_REGISTRY_IMAGE:latest
+
+# -------------------------------
+# Build de l'image Docker du site Astro
+# -------------------------------
+build-image:
+  stage: build
+  image: docker:24
+  script:
+    - docker build -t $IMAGE_TAG -t $IMAGE_LATEST ./site-web
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+# -------------------------------
+# Push vers le registry
+# -------------------------------
+push-image:
+  stage: push
+  image: docker:24
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+  script:
+    - docker push $IMAGE_TAG
+    - docker push $IMAGE_LATEST
+  needs: ["build-image"]
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'

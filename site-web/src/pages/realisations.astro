@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Sélection initiale issue du document de synthèse — sera remplacée par une
+// collection Astro dans une prochaine itération.
+const cases = [
+  {
+    domain: 'Infrastructure',
+    title: 'Migration vers un cloud souverain européen',
+    image: '/images/realisations/migration-cloud-souverain.jpg',
+    imageAlt: 'Illustration d\'une migration depuis un hebergeur historique vers un cloud souverain europeen.',
+    challenge: "Bascule d'un hébergeur historique vers un cloud souverain avec remise à plat des trois environnements.",
+    outcome: "Infrastructure isolée par environnement, souveraineté des données, onboarding facilité par un portail unique.",
+    duration: '1 semaine',
+    stack: ['Kubernetes', 'OVH', 'Vault', 'Bookstack'],
+  },
+  {
+    domain: 'Outils internes',
+    title: 'Déploiement d’une suite d’outils métiers auto-hébergés',
+    image: '/images/realisations/outils-metiers.jpg',
+    imageAlt: 'Tableau de bord regroupant les outils internes auto-heberges : wiki, coffre-fort de mots de passe, signature electronique, dashboard.',
+    challenge: "Dépendance forte à des SaaS payants pour le wiki, les mots de passe et la signature, avec des données dispersées hors de l'infrastructure.",
+    outcome: "Suite cohérente d'outils internes (wiki, coffre-fort, signature, dashboard) accessibles via un point d'entrée unique, données rapatriées, coûts récurrents réduits.",
+    duration: '2 à 3 semaines',
+    stack: ['Bookstack', 'Vaultwarden', 'DocuSeal', 'Dashy', 'Keycloak'],
+  },
+  {
+    domain: 'Sécurité',
+    title: 'Plan de reprise d’activité Kubernetes',
+    image: '/images/realisations/pra-kubernetes.jpg',
+    imageAlt: 'Schema d\'un plan de reprise d\'activite Kubernetes avec sauvegardes Velero vers MinIO.',
+    challenge: "Aucune procédure de sauvegarde industrialisée pour les workloads critiques.",
+    outcome: "Capacité de restauration vérifiée, RPO/RTO maîtrisés, conformité renforcée.",
+    duration: '2 semaines',
+    stack: ['Velero', 'MinIO', 'Kubernetes'],
+  },
+  {
+    domain: 'CI/CD',
+    title: 'Pipeline applicatif de bout en bout',
+    image: '/images/realisations/pipeline-applicatif.jpg',
+    imageAlt: 'Pipeline GitLab CI/CD de la qualite de code au deploiement Kubernetes via Flux CD.',
+    challenge: "Déploiements manuels, sans analyse qualité ni déploiement continu.",
+    outcome: "Cycle de livraison raccourci, qualité mesurée à chaque commit, déploiement auditable.",
+    duration: '2 semaines',
+    stack: ['GitLab CI', 'SonarQube', 'Docker', 'Flux CD'],
+  },
+  {
+    domain: 'IA',
+    title: 'Assistant de code souverain sur GPU local',
+    image: '/images/realisations/assistant-code-souverain.jpg',
+    imageAlt: 'Assistant de code base sur un LLM open source tournant sur GPU local.',
+    challenge: "Remplacer un assistant propriétaire par une solution sans exfiltration du code source.",
+    outcome: "Indépendance vis-à-vis des SaaS, confidentialité du code, économies de licence.",
+    duration: '3 semaines',
+    stack: ['Llama', 'Mistral', 'Qwen', 'continue.dev'],
+  },
+  {
+    domain: 'IA',
+    title: 'Transcription et diarisation auto-hébergées',
+    image: '/images/realisations/transcription-diarisation.jpg',
+    imageAlt: 'Pipeline de transcription audio avec identification des locuteurs, auto-heberge.',
+    challenge: "Besoin de transcriptions fiables avec identification des locuteurs, sans service externe.",
+    outcome: "Transcription souveraine, qualité ajustable au domaine métier.",
+    duration: '3 à 4 semaines',
+    stack: ['Whisper', 'pyannote', 'Docker', 'GPU'],
+  },
+  {
+    domain: 'Sécurité',
+    title: 'Authentification forte FIDO2 à distance',
+    image: '/images/realisations/fido2-distance.jpg',
+    imageAlt: 'Cle de securite FIDO2 utilisee pour une authentification passwordless a distance.',
+    challenge: "Généralisation du passwordless aux postes accédés à distance.",
+    outcome: "Déblocage du projet d’auth forte, réduction du risque mots de passe, procédure reproductible.",
+    duration: '1 semaine',
+    stack: ['Windows Server', 'GPO', 'FIDO2', 'PowerShell'],
+  },
+];
+---
+
+<BaseLayout title="Réalisations" description="Cas clients anonymisés : missions concrètes en infrastructure, sécurité, CI/CD et IA souveraine.">
+
+  <section class="border-b border-brand-700">
+    <div class="container-page py-16">
+      <h1 class="text-4xl sm:text-5xl font-bold">Réalisations</h1>
+      <p class="mt-4 text-lg text-brand-300 max-w-2xl">
+        Sélection de missions menées sur sept mois auprès de PME et ETI.
+        Chaque cas est anonymisé et reflète un besoin réel résolu sur le terrain.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container-page py-16">
+      <div class="grid gap-6 md:grid-cols-2">
+        {cases.map(({ domain, title, challenge, outcome, duration, stack, image, imageAlt }) => (
+          <article class="rounded-lg border border-brand-700 bg-brand-900 overflow-hidden hover:border-accent-500 transition flex flex-col">
+            <img
+              src={image}
+              alt={imageAlt}
+              loading="lazy"
+              decoding="async"
+              width="1200"
+              height="750"
+              class="w-full aspect-[16/10] object-cover bg-brand-800/60"
+            />
+            <div class="p-6 flex flex-col flex-1">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-medium uppercase tracking-wider text-accent-500">{domain}</span>
+                <span class="text-brand-400">{duration}</span>
+              </div>
+              <h3 class="mt-3 text-xl font-semibold">{title}</h3>
+              <p class="mt-3 text-sm text-brand-300">
+                <span class="font-medium text-brand-100">Contexte. </span>{challenge}
+              </p>
+              <p class="mt-2 text-sm text-brand-300">
+                <span class="font-medium text-brand-100">Résultat </span>{outcome}
+              </p>
+              <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
+                {stack.map((tech) => (
+                  <span class="text-xs font-mono px-2 py-0.5 rounded bg-brand-800/60 text-brand-200 border border-brand-700">{tech}</span>
+                ))}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

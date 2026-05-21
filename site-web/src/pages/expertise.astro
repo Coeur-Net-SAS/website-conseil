@@ -1,0 +1,216 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Ordre revu :
+//   1.  GRC                                                     [vedette]
+//   2.  Aide au financement public                              [vedette]
+//   3-7. Modernisation : cloud, securite, CI/CD, IA gen., admin
+//   8-9. R&D heritage : recherche IA & modeles, IAM biometrie
+//
+// Les ancres #grc, #financement, #recherche-ia, #iam-biometrie permettent
+// les liens internes depuis l'accueil et le footer.
+
+const domains = [
+  {
+    id: 'grc',
+    flagship: true,
+    title: 'Gouvernance, risques & conformité (GRC)',
+    image: '/images/expertise/03-grc-conformite.jpg',
+    imageAlt: "Cartographie des risques et plan de conformite RGPD, ISO 27001, ISO 42001.",
+    intro: "Notre cœur d'activité. Mise en conformité par audit interne, gap analysis et plan de remédiation chiffré, sur les référentiels les plus structurants du marché.",
+    points: [
+      'Audit interne : cartographie des risques, plan de remédiation chiffré et priorisé.',
+      'Mise en conformité RGPD : registre, AIPD, droits des personnes, désignation DPO.',
+      'Préparation ISO/IEC 27001 : SMSI, contrôles Annexe A, déclaration d’applicabilité.',
+      'Préparation ISO/IEC 42001 : management de l’IA, contrôles spécifiques aux systèmes IA.',
+      'Politique de sécurité, classification des données, plan de continuité d’activité.',
+    ],
+    stack: ['ISO 27001', 'ISO 42001', 'RGPD', 'NIST CSF', 'AIPD', 'Politique SSI'],
+  },
+  {
+    id: 'financement',
+    flagship: true,
+    title: 'Aide au financement public & subventions',
+    image: '/images/expertise/09-financement-public.jpg',
+    imageAlt: "Activation des dispositifs de financement public : CIR, CII, BPI, France 2030, FEDER.",
+    intro: "Identifier et activer les dispositifs de financement public éligibles pour réduire le coût des projets de conformité, de R&D et de modernisation. Nos missions deviennent partiellement subventionnées pour le client.",
+    points: [
+      'Diagnostic d’éligibilité aux dispositifs nationaux et régionaux.',
+      'Crédit d’Impôt Recherche (CIR) et Crédit d’Impôt Innovation (CII).',
+      'Appels à projets BPI France et France 2030.',
+      'Fonds européens (FEDER) et aides Région Centre-Val de Loire.',
+      'Montage des dossiers, justificatifs techniques et suivi des engagements.',
+    ],
+    stack: ['CIR', 'CII', 'BPI France', 'France 2030', 'FEDER', 'Région CVL'],
+  },
+  {
+    id: 'cloud',
+    title: 'Infrastructure cloud & déploiement d’outils internes',
+    image: '/images/expertise/04-cloud-infra.jpg',
+    imageAlt: "Infrastructure cloud segmentee par environnement (dev, staging, production).",
+    intro: "Mettre à disposition d'une équipe une infrastructure cloud propre, segmentée par environnement et instrumentée par les outils nécessaires au quotidien.",
+    points: [
+      'Migration vers un fournisseur cloud souverain (OVH, Scaleway).',
+      'Industrialisation des environnements dev / staging / production.',
+      'Déploiement d’outils internes : wiki, dashboard, signature électronique, coffre-fort de secrets.',
+      'Environnements de développement reproductibles (dev containers, GPU dédiés).',
+    ],
+    stack: ['Kubernetes', 'OVH Cloud', 'Vault', 'Bookstack', 'Dashy', 'DocuSeal'],
+  },
+  {
+    id: 'securite',
+    title: 'Sécurité & résilience',
+    image: '/images/expertise/05-securite.jpg',
+    imageAlt: "Chaine de protection : sauvegardes, scan de vulnerabilites, threat modeling.",
+    intro: "Réduire la surface d'attaque, documenter les menaces, sécuriser les accès et garantir la continuité d'activité.",
+    points: [
+      'Plan de reprise d’activité (sauvegardes Velero, stockage objet S3-compatible).',
+      'Threat modeling et sensibilisation des équipes métier.',
+      'Étude comparative et exploitation de scanners de vulnérabilités.',
+      'Analyse SCA intégrée à la CI/CD (shift-left).',
+    ],
+    stack: ['Velero', 'MinIO', 'Trivy', 'OpenVAS', 'GPO', 'Threat modeling'],
+  },
+  {
+    id: 'cicd',
+    title: 'CI/CD & industrialisation',
+    image: '/images/expertise/06-cicd.jpg',
+    imageAlt: "Pipeline CI/CD du commit au deploiement Kubernetes.",
+    intro: "Transformer un déploiement manuel en flux automatisé, reproductible et traçable, du commit jusqu'à la production.",
+    points: [
+      'Pipelines applicatives complètes (qualité, build, push, déploiement).',
+      'Pipelines de migration de base de données et de mise à jour du fournisseur d’identité.',
+      'Centralisation des manifests Kubernetes (GitOps, Flux CD).',
+      'Gestion des images automatisée (image automation Flux).',
+    ],
+    stack: ['GitLab CI/CD', 'SonarQube', 'Docker', 'Flux CD', 'Hasura', 'Keycloak'],
+  },
+  {
+    id: 'ia-generative',
+    title: 'IA générative & automatisation',
+    image: '/images/expertise/07-ia-generative.jpg',
+    imageAlt: "Assistant IA souverain et workflows agentiques connectes aux outils metiers.",
+    intro: "Intégrer l'IA générative et les workflows agentiques au poste de travail et aux processus métiers, en privilégiant des solutions souveraines.",
+    points: [
+      'Assistants de code souverains basés sur des modèles open source locaux.',
+      'Automatisation du traitement des e-mails et des rapports quotidiens.',
+      'Transcription et diarisation de réunions auto-hébergées.',
+      'Workflows n8n enrichis par LLM local et APIs métier.',
+    ],
+    stack: ['Llama', 'Mistral', 'Qwen', 'Whisper', 'pyannote', 'continue.dev', 'n8n'],
+  },
+  {
+    id: 'administration',
+    title: 'Administration système & gestion d’identité opérationnelle',
+    image: '/images/expertise/08-administration.jpg',
+    imageAlt: "Console d'administration et integration aux annuaires d'identite cloud.",
+    intro: "Résoudre les incidents, configurer postes et serveurs, intégrer aux annuaires cloud et gérer finement les accès au quotidien.",
+    points: [
+      'Jointure de machines à un annuaire d’identité cloud (Entra ID).',
+      'Coffre-fort de secrets en cluster et intégration Kubernetes.',
+      'Gestion fine des GPO et tâches planifiées Windows.',
+    ],
+    stack: ['Entra ID', 'Active Directory', 'Vault', 'Windows Server', 'PowerShell'],
+  },
+  {
+    id: 'recherche-ia',
+    rd: true,
+    title: 'Recherche IA & modèles sur mesure',
+    image: '/images/expertise/01-recherche-ia.jpg',
+    imageAlt: "Schema d'un modele d'IA biometrique avec analyse des biais et explicabilite.",
+    intro: "Notre R&D propre. Conception et entraînement de modèles d'IA spécifiques au métier du client — historiquement orientés biométrie cardiaque, étendus à d'autres signaux et modalités.",
+    points: [
+      'Développement de modèles biométriques sur mesure (cardiaque, multimodal).',
+      'Analyse rigoureuse des biais : équité statistique par sous-population.',
+      'Explicabilité (XAI) : SHAP, LIME, cartes de saillance.',
+      'Pipelines d’entraînement reproductibles, versionnés et instrumentés.',
+      'Cadre éthique aligné sur l’AI Act et l’ISO/IEC 42001.',
+    ],
+    stack: ['PyTorch', 'TensorFlow', 'MLflow', 'ONNX', 'SHAP', 'Fairlearn', 'DVC'],
+  },
+  {
+    id: 'iam-biometrie',
+    rd: true,
+    title: 'Gestion d’identité & authentification biométrique',
+    image: '/images/expertise/02-iam-biometrie.jpg',
+    imageAlt: "Architecture IAM avec federation, MFA et authentification biometrique.",
+    intro: "Sécuriser le cycle de vie des identités et déployer des méthodes d'authentification fortes, y compris biométriques (cardiaque), dans le respect strict du RGPD.",
+    points: [
+      'Architecture IAM : SSO, fédération, gestion fine des rôles (RBAC, ABAC).',
+      'Provisioning / déprovisioning automatisés (SCIM, intégration RH).',
+      'Authentification forte : FIDO2, WebAuthn, OAuth2/OIDC.',
+      'Biométrie utilisateur (cardiaque, empreinte, visage, voix) — conforme RGPD art. 9.',
+      'Audit des accès, journalisation centralisée, revue périodique des droits.',
+    ],
+    stack: ['Keycloak', 'Entra ID', 'FIDO2', 'WebAuthn', 'SCIM', 'OAuth2/OIDC'],
+  },
+];
+---
+
+<BaseLayout title="Expertise" description="GRC en tete (RGPD, ISO 27001, ISO 42001), financement public, modernisation IT, et R&D propre en biometrie cardiaque.">
+
+  <section class="border-b border-brand-700">
+    <div class="container-page py-16">
+      <h1 class="text-4xl sm:text-5xl font-bold">Nos expertises</h1>
+      <p class="mt-4 text-lg text-brand-300 max-w-2xl">
+        La <strong class="text-white">GRC</strong> au centre, soutenue par cinq expertises
+        de modernisation IT. Nous proposons aussi une aide à l'activation des
+        <strong class="text-white">financements publics</strong>. Notre R&amp;D en
+        biométrie cardiaque alimente l'ensemble.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container-page py-16 space-y-20">
+      {domains.map(({ id, title, intro, points, stack, image, imageAlt, flagship, rd }, i) => (
+        <article id={id} class="grid lg:grid-cols-3 gap-8 lg:gap-12 items-start scroll-mt-24">
+          <div class="lg:col-span-1 space-y-4">
+            <div class="flex items-center gap-3 flex-wrap">
+              <p class="text-sm font-mono text-accent-500">0{i + 1}</p>
+              {flagship && (
+                <span class="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded bg-accent-500/20 text-accent-500 border border-accent-500/40">
+                  Expertise vedette
+                </span>
+              )}
+              {rd && (
+                <span class="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded bg-brand-800 text-brand-300 border border-brand-700">
+                  R&amp;D propre
+                </span>
+              )}
+            </div>
+            <h2 class="text-2xl font-bold">{title}</h2>
+            <img
+              src={image}
+              alt={imageAlt}
+              loading="lazy"
+              decoding="async"
+              width="1200"
+              height="630"
+              class="w-full rounded-lg border border-brand-700 bg-brand-800/60 aspect-[16/9] object-cover"
+            />
+          </div>
+          <div class="lg:col-span-2">
+            <p class="text-brand-200 leading-relaxed">{intro}</p>
+            <ul class="mt-5 space-y-2 text-brand-200">
+              {points.map((p) => (
+                <li class="pl-5 relative">
+                  <span class="absolute left-0 top-2.5 h-1.5 w-1.5 rounded-full bg-accent-500"></span>
+                  {p}
+                </li>
+              ))}
+            </ul>
+            <div class="mt-6 flex flex-wrap gap-2">
+              {stack.map((tech) => (
+                <span class="text-xs font-mono px-2 py-1 rounded bg-brand-800/60 text-brand-200 border border-brand-700">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+</BaseLayout>

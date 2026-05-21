@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ----------------------------------------------------------------------------
+ * Theme : sombre (fond noir, cartes navy foncees, accent teal conserve)
+ *   bg page         : #000
+ *   bg surface card : brand-900  (#0f1e3a)
+ *   bg surface alt  : brand-800  (#1f3a5f)
+ *   texte body      : brand-200  (#cbd5e1)
+ *   titres          : blanc
+ *   bordures        : brand-700  (#1e293b)
+ *   accent          : accent-500 (#0f766e)
+ * -------------------------------------------------------------------------- */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-black text-brand-200 antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  h1, h2, h3, h4 {
+    @apply text-white font-semibold tracking-tight;
+  }
+
+  a {
+    @apply transition-colors;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-md bg-accent-500 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-accent-600 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 focus:ring-offset-black transition;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-md border border-brand-700 bg-brand-900 px-5 py-2.5 text-sm font-medium text-brand-100 shadow-sm hover:border-accent-500 hover:text-white transition;
+  }
+
+  .container-prose {
+    @apply mx-auto max-w-3xl px-4 sm:px-6;
+  }
+
+  .container-page {
+    @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+ * Mise en forme du corps des articles de blog (Markdown rendu).
+ * Pas de @tailwindcss/typography : on ecrit des styles simples adaptes au dark.
+ * -------------------------------------------------------------------------- */
+.article-body {
+  @apply text-brand-100 leading-relaxed;
+}
+.article-body > * + * {
+  @apply mt-5;
+}
+.article-body h2 {
+  @apply text-2xl mt-12 mb-3;
+}
+.article-body h3 {
+  @apply text-xl mt-10 mb-2;
+}
+.article-body p {
+  @apply text-brand-100;
+}
+.article-body a {
+  @apply text-accent-500 underline-offset-4 hover:underline;
+}
+.article-body strong {
+  @apply text-white font-semibold;
+}
+.article-body ul,
+.article-body ol {
+  @apply pl-6 space-y-2;
+}
+.article-body ul {
+  @apply list-disc marker:text-accent-500;
+}
+.article-body ol {
+  @apply list-decimal marker:text-accent-500;
+}
+.article-body code {
+  @apply px-1.5 py-0.5 rounded bg-brand-800/60 text-accent-500 text-sm font-mono;
+}
+.article-body pre {
+  @apply rounded-lg bg-brand-900 border border-brand-700 p-4 overflow-x-auto;
+}
+.article-body pre code {
+  @apply bg-transparent p-0 text-brand-100;
+}
+.article-body blockquote {
+  @apply border-l-4 border-accent-500 pl-4 text-brand-300 italic;
+}
+.article-body hr {
+  @apply border-brand-700 my-10;
+}

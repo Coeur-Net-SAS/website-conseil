@@ -1,4 +1,4 @@
-# Conseil
+# Coeur-net-conseil
 
 
 
@@ -15,14 +15,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://git.coeur-net.io/mdiallo/conseil.git
+git remote add origin https://git.coeur-net.io/mdiallo/coeur-net-conseil.git
 git branch -M main
 git push -uf origin main
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](https://git.coeur-net.io/mdiallo/conseil/-/settings/integrations)
+- [ ] [Set up project integrations](https://git.coeur-net.io/mdiallo/coeur-net-conseil/-/settings/integrations)
 
 ## Collaborate with your team
 

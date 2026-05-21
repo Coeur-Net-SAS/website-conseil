@@ -1,0 +1,35 @@
+# Tout ce qui ne doit PAS entrer dans le contexte Docker.
+# Reduit la taille de l'image et evite les fuites de fichiers locaux.
+
+# Dependances installees localement (recreees dans l'image)
+node_modules
+
+# Artefacts de build locaux
+dist
+.astro
+
+# Logs et caches
+npm-debug.log*
+.npm
+*.log
+
+# Outils et IDE
+.git
+.gitignore
+.vscode
+.idea
+.DS_Store
+
+# Fichiers Docker eux-memes (pas besoin dans le contexte)
+Dockerfile
+Dockerfile.dev
+.dockerignore
+docker-compose.yml
+
+# Environnements locaux
+.env
+.env.local
+.env.*.local
+
+# Documentation specifique au depot
+README.md

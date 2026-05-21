@@ -1,0 +1,107 @@
+---
+// Formulaire d'inscription newsletter, branche sur Formspree (meme service
+// que la page /contact). L'email est recu dans la boite Formspree, qu'on
+// reverse manuellement dans la liste de diffusion.
+//
+// Mise en service :
+//   1. Sur https://formspree.io, creer un formulaire dedie "Newsletter".
+//   2. Recuperer le form ID (de la forme "xyzabcde").
+//   3. Remplacer FORMSPREE_NEWSLETTER_ID ci-dessous.
+//
+// Variantes :
+//   compact = true  : version horizontale pour le footer
+//   compact = false : version verticale pour la page /blog
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+
+// ============================================================================
+// A remplacer par l'ID du formulaire Formspree dedie a la newsletter
+// ============================================================================
+const FORMSPREE_NEWSLETTER_ID = "FORMSPREE_NEWSLETTER_ID";
+const ACTION_URL = `https://formspree.io/f/${FORMSPREE_NEWSLETTER_ID}`;
+---
+
+{compact ? (
+  <form
+    method="POST"
+    action={ACTION_URL}
+    class="space-y-3"
+  >
+    <label class="block text-xs font-semibold uppercase tracking-wider text-brand-400" for="newsletter-email-footer">
+      Newsletter
+    </label>
+    <p class="text-sm text-brand-300 leading-relaxed">
+      Recevez nos notes techniques par e-mail, une à deux fois par mois.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-2">
+      <input
+        id="newsletter-email-footer"
+        type="email"
+        name="email"
+        required
+        placeholder="vous@exemple.fr"
+        autocomplete="email"
+        class="flex-1 rounded-md border border-brand-700 bg-black px-3 py-2 text-sm text-brand-100 placeholder:text-brand-500 focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500"
+      />
+      <button type="submit" class="btn-primary !py-2 !px-4 text-sm">
+        S'abonner
+      </button>
+    </div>
+    <!-- Honeypot anti-spam Formspree -->
+    <input type="text" name="_gotcha" value="" class="hidden" tabindex="-1" autocomplete="off" />
+    <!-- Tag pour distinguer dans la boite Formspree -->
+    <input type="hidden" name="_subject" value="Nouvel abonne newsletter (footer)" />
+    <p class="text-xs text-brand-400 leading-relaxed">
+      Désinscription en un clic depuis chaque e-mail. Conforme RGPD.
+    </p>
+  </form>
+) : (
+  <form
+    method="POST"
+    action={ACTION_URL}
+    class="rounded-lg border border-brand-700 bg-brand-900 p-6 sm:p-8"
+  >
+    <p class="text-xs uppercase tracking-wider font-semibold text-accent-500">
+      Newsletter
+    </p>
+    <h3 class="mt-2 text-2xl font-bold text-white">
+      Une à deux fois par mois, dans votre boîte e-mail.
+    </h3>
+    <p class="mt-2 text-brand-300 leading-relaxed">
+      Retours d'expérience sur la recherche IA, l'authentification biométrique, la conformité
+      GRC et l'infrastructure cloud. Pas de spam, désabonnement en un clic.
+    </p>
+
+    <div class="mt-5 flex flex-col sm:flex-row gap-3">
+      <label class="sr-only" for="newsletter-email-page">Votre adresse e-mail</label>
+      <input
+        id="newsletter-email-page"
+        type="email"
+        name="email"
+        required
+        placeholder="vous@exemple.fr"
+        autocomplete="email"
+        class="flex-1 rounded-md border border-brand-700 bg-black px-4 py-2.5 text-brand-100 placeholder:text-brand-500 focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500"
+      />
+      <button type="submit" class="btn-primary">
+        S'abonner
+      </button>
+    </div>
+
+    <!-- Honeypot anti-spam Formspree -->
+    <input type="text" name="_gotcha" value="" class="hidden" tabindex="-1" autocomplete="off" />
+    <input type="hidden" name="_subject" value="Nouvel abonne newsletter (page blog)" />
+
+    <label class="mt-4 flex items-start gap-2 text-sm text-brand-300">
+      <input type="checkbox" name="consent" value="1" required class="mt-1 accent-accent-500" />
+      <span>
+        J'accepte de recevoir la newsletter par e-mail. Mes données sont traitées
+        conformément à la <a href="/confidentialite" class="text-accent-500 underline">politique de confidentialité</a>.
+      </span>
+    </label>
+  </form>
+)}

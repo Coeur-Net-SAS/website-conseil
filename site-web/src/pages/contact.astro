@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// 1) Crée un compte gratuit sur https://formspree.io
+// 2) Crée un nouveau formulaire et copie l'ID (ex: "xrgjpqab")
+// 3) Remplace FORMSPREE_FORM_ID ci-dessous par ton ID
+// Tant que l'ID n'est pas configuré, le formulaire est désactivé visuellement.
+const FORMSPREE_FORM_ID = 'mlgzbzrj';
+const formAction = `https://formspree.io/f/${FORMSPREE_FORM_ID}`;
+//const isConfigured = FORMSPREE_FORM_ID !== 'FORMSPREE_FORM_ID';
+const isConfigured = true
+---
+
+<BaseLayout title="Contact" description="Décrivez votre besoin, nous revenons sous 48h avec une analyse synthétique.">
+
+  <section class="border-b border-brand-700">
+    <div class="container-page py-16">
+      <h1 class="text-4xl sm:text-5xl font-bold">Discutons de votre projet</h1>
+      <p class="mt-4 text-lg text-brand-300 max-w-2xl">
+        Décrivez votre contexte en quelques lignes. Nous revenons avec une analyse synthétique
+        et des pistes concrètes sous 48 heures ouvrées.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container-prose py-12">
+      {!isConfigured && (
+        <div class="mb-6 rounded-md border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+          <strong>Configuration requise.</strong> Renseigne ton identifiant Formspree dans
+          <code class="font-mono">src/pages/contact.astro</code> pour activer le formulaire.
+        </div>
+      )}
+
+      <form action={formAction} method="POST" class="space-y-5">
+        <div>
+          <label for="name" class="block text-sm font-medium text-brand-100">Nom et prénom</label>
+          <input type="text" id="name" name="name" required
+            class="mt-1 block w-full rounded-md border border-brand-700 px-3 py-2 shadow-sm focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500"
+          />
+        </div>
+
+        <div>
+          <label for="email" class="block text-sm font-medium text-brand-100">Email professionnel</label>
+          <input type="email" id="email" name="email" required
+            class="mt-1 block w-full rounded-md border border-brand-700 px-3 py-2 shadow-sm focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500"
+          />
+        </div>
+
+        <div>
+          <label for="company" class="block text-sm font-medium text-brand-100">Entreprise <span class="text-brand-400 font-normal">(optionnel)</span></label>
+          <input type="text" id="company" name="company"
+            class="mt-1 block w-full rounded-md border border-brand-700 px-3 py-2 shadow-sm focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500"
+          />
+        </div>
+
+        <div>
+          <label for="message" class="block text-sm font-medium text-brand-100">Votre besoin</label>
+          <textarea id="message" name="message" rows="6" required
+            class="mt-1 block w-full rounded-md border border-brand-700 px-3 py-2 shadow-sm focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500"
+          ></textarea>
+        </div>
+
+        <!-- Honeypot anti-spam (champ caché) -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+        <!-- Sujet du mail reçu côté Formspree -->
+        <input type="hidden" name="_subject" value="Nouveau contact depuis le site" />
+
+        <div class="flex items-start gap-3">
+          <input type="checkbox" id="consent" name="consent" required
+            class="mt-1 h-4 w-4 rounded border-brand-300 text-accent-500 focus:ring-accent-500"
+          />
+          <label for="consent" class="text-sm text-brand-300">
+            J'accepte que mes informations soient utilisées pour répondre à ma demande.
+            Voir la <a href="/confidentialite" class="text-accent-500 hover:underline">politique de confidentialité</a>.
+          </label>
+        </div>
+
+        <button type="submit" class="btn-primary" disabled={!isConfigured}>
+          Envoyer le message
+        </button>
+      </form>
+    </div>
+  </section>
+
+</BaseLayout>

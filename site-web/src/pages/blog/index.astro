@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NewsletterForm from '../../components/NewsletterForm.astro';
+import { getCollection } from 'astro:content';
+
+// Récupère tous les articles non-draft, triés du plus récent au plus ancien
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts.sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
+
+// Convention : si pas de cover défini dans le frontmatter, on cherche une image
+// portant le slug de l'article dans /public/images/blog/<slug>.jpg
+const coverFor = (post: any) =>
+  post.data.cover ?? `/images/blog/${post.slug}.jpg`;
+---
+
+<BaseLayout title="Blog" description="Retours d'expérience et notes techniques sur l'infrastructure, la sécurité, le CI/CD et l'IA souveraine.">
+
+  <section class="border-b border-brand-700">
+    <div class="container-page py-16">
+      <h1 class="text-4xl sm:text-5xl font-bold">Notes techniques</h1>
+      <p class="mt-4 text-lg text-brand-300 max-w-2xl">
+        Retours d'expérience issus du terrain. Migration cloud, GitOps,
+        IA souveraine, automatisation : les détails qui font la différence.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container-page py-12">
+      {posts.length === 0 && (
+        <p class="text-brand-300">Aucun article publié pour le moment. Revenez bientôt.</p>
+      )}
+
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post) => (
+          <article class="group">
+            <a href={`/blog/${post.slug}`} class="block">
+              <img
+                src={coverFor(post)}
+                alt={`Couverture de l'article : ${post.data.title}`}
+                loading="lazy"
+                decoding="async"
+                width="1200"
+                height="630"
+                class="w-full aspect-[16/10] rounded-lg border border-brand-700 group-hover:border-accent-500 transition object-cover bg-gradient-to-br from-brand-800 to-brand-900"
+              />
+              <div class="mt-4">
+                <div class="flex flex-wrap gap-1.5">
+                  {post.data.tags.slice(0, 2).map((tag) => (
+                    <span class="text-xs font-mono px-2 py-0.5 rounded bg-brand-800/60 text-brand-200 border border-brand-700">{tag}</span>
+                  ))}
+                </div>
+                <h2 class="mt-3 text-xl font-semibold group-hover:text-accent-500 transition">
+                  {post.data.title}
+                </h2>
+                <p class="mt-2 text-sm text-brand-300 line-clamp-3">{post.data.description}</p>
+                <p class="mt-3 text-xs text-brand-400">
+                  <time datetime={post.data.publishDate.toISOString()}>
+                    {formatDate(post.data.publishDate)}
+                  </time>
+                </p>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-brand-700">
+    <div class="container-page py-16">
+      <NewsletterForm />
+    </div>
+  </section>
+
+</BaseLayout>

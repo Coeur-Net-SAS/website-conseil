@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Politique de confidentialité">
+  <section class="border-b border-brand-700">
+    <div class="container-page py-12">
+      <h1 class="text-4xl font-bold">Politique de confidentialité</h1>
+    </div>
+  </section>
+
+  <section>
+    <div class="container-prose py-12 text-brand-200 leading-relaxed space-y-6">
+      <p>
+        Cette page décrit comment sont collectées et traitées les données fournies via le
+        formulaire de contact, dans le respect du Règlement Général sur la Protection des
+        Données (RGPD).
+      </p>
+
+      <div>
+        <h2 class="text-xl font-semibold text-white">Données collectées</h2>
+        <p class="mt-2">
+          Lors de l'envoi du formulaire de contact, les informations suivantes sont collectées :
+          nom, adresse e-mail, entreprise (optionnel) et message. Aucune donnée n'est collectée
+          en dehors de cette démarche volontaire.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-white">Finalité du traitement</h2>
+        <p class="mt-2">
+          Ces données sont utilisées uniquement pour répondre à votre demande. Elles ne sont
+          ni revendues, ni partagées avec des tiers à des fins commerciales.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-white">Sous-traitant</h2>
+        <p class="mt-2">
+          Le formulaire est traité par Formspree (Formspree, Inc., États-Unis). Les données
+          transitent par leurs serveurs avant d'être transmises par e-mail. Plus d'informations
+          sur leur politique : <a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener" class="text-accent-500 hover:underline">formspree.io</a>.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-white">Vos droits</h2>
+        <p class="mt-2">
+          Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de
+          suppression de vos données. Pour exercer ces droits, contactez-nous via le
+          <a href="/contact" class="text-accent-500 hover:underline">formulaire de contact</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
