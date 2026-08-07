@@ -7,7 +7,7 @@ export default defineConfig({
   // Le sitemap sera reactive une fois ce domaine en place :
   //   import sitemap from '@astrojs/sitemap';
   //   integrer sitemap() dans la liste integrations.
-  site: 'https://www.exemple.fr',
+  site: 'https://conseil.coeur-net.fr',
   integrations: [
     tailwind({
       // On utilisera notre propre fichier de styles globaux
