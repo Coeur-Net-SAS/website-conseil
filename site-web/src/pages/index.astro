@@ -10,12 +10,6 @@ const modernizationDomains = [
   { title: 'Administration système',        desc: 'GPO, jointure annuaire cloud, gestion fine des identités au quotidien.',                       image: '/images/expertise/08-administration.jpg',  imageAlt: 'Administration et integration aux annuaires cloud.' },
 ];
 
-const stats = [
-  { value: '2022',  label: 'année de fondation' },
-  { value: '2',     label: 'sites en Centre-Val de Loire' },
-  { value: '3',     label: 'référentiels visés (RGPD / ISO 27001 / ISO 42001)' },
-  { value: '100%',  label: 'livrables documentés' },
-];
 ---
 
 <BaseLayout title="Accueil" description="Coeur-Net : conseil en gouvernance, conformite (GRC, RGPD, ISO 27001, ISO 42001) et modernisation IT, soutenu par une R&D propre en biometrie cardiaque.">
@@ -138,8 +132,7 @@ const stats = [
             <span class="text-xs font-mono px-2 py-1 rounded bg-brand-900 text-brand-200 border border-brand-700">CIR</span>
             <span class="text-xs font-mono px-2 py-1 rounded bg-brand-900 text-brand-200 border border-brand-700">CII</span>
             <span class="text-xs font-mono px-2 py-1 rounded bg-brand-900 text-brand-200 border border-brand-700">BPI France</span>
-            <span class="text-xs font-mono px-2 py-1 rounded bg-brand-900 text-brand-200 border border-brand-700">France 2030</span>
-            <span class="text-xs font-mono px-2 py-1 rounded bg-brand-900 text-brand-200 border border-brand-700">FEDER</span>
+
             <span class="text-xs font-mono px-2 py-1 rounded bg-brand-900 text-brand-200 border border-brand-700">Région Centre-Val de Loire</span>
           </div>
         </div>
@@ -147,22 +140,6 @@ const stats = [
           <a href="/expertise#financement" class="btn-primary">Découvrir le dispositif</a>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ====================================================================
-       CHIFFRES
-       ==================================================================== -->
-  <section class="bg-brand-900/40 border-b border-brand-700">
-    <div class="container-page py-12">
-      <dl class="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-        {stats.map(({ value, label }) => (
-          <div>
-            <dt class="text-3xl sm:text-4xl font-bold text-white">{value}</dt>
-            <dd class="mt-1 text-sm text-brand-300">{label}</dd>
-          </div>
-        ))}
-      </dl>
     </div>
   </section>
 

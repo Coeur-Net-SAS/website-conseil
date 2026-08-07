@@ -1,14 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-// 1) Crée un compte gratuit sur https://formspree.io
-// 2) Crée un nouveau formulaire et copie l'ID (ex: "xrgjpqab")
-// 3) Remplace FORMSPREE_FORM_ID ci-dessous par ton ID
-// Tant que l'ID n'est pas configuré, le formulaire est désactivé visuellement.
-const FORMSPREE_FORM_ID = 'mlgzbzrj';
-const formAction = `https://formspree.io/f/${FORMSPREE_FORM_ID}`;
-//const isConfigured = FORMSPREE_FORM_ID !== 'FORMSPREE_FORM_ID';
-const isConfigured = true
 ---
 
 <BaseLayout title="Contact" description="Décrivez votre besoin, nous revenons sous 48h avec une analyse synthétique.">
@@ -25,14 +16,22 @@ const isConfigured = true
 
   <section>
     <div class="container-prose py-12">
-      {!isConfigured && (
-        <div class="mb-6 rounded-md border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
-          <strong>Configuration requise.</strong> Renseigne ton identifiant Formspree dans
-          <code class="font-mono">src/pages/contact.astro</code> pour activer le formulaire.
-        </div>
-      )}
 
-      <form action={formAction} method="POST" class="space-y-5">
+      <div id="form-success" class="hidden mb-6 rounded-md border border-green-700 bg-green-900/30 p-4 text-sm text-green-300">
+        Message envoyé. Nous vous répondons sous 48 heures ouvrées.
+      </div>
+      <div id="form-error" class="hidden mb-6 rounded-md border border-red-700 bg-red-900/30 p-4 text-sm text-red-300">
+        Une erreur est survenue. Veuillez réessayer ou nous contacter directement par email.
+      </div>
+
+      <form id="contact-form" class="space-y-5">
+
+        <input type="hidden" name="access_key" value="5f48e5ca-8bcd-4375-b3fe-7a696884d0fb" />
+        <input type="hidden" name="subject" value="Nouveau contact depuis le site" />
+        <input type="hidden" name="from_name" value="Site Conseil" />
+        <!-- Honeypot anti-spam -->
+        <input type="checkbox" name="botcheck" class="hidden" aria-hidden="true" />
+
         <div>
           <label for="name" class="block text-sm font-medium text-brand-100">Nom et prénom</label>
           <input type="text" id="name" name="name" required
@@ -61,12 +60,6 @@ const isConfigured = true
           ></textarea>
         </div>
 
-        <!-- Honeypot anti-spam (champ caché) -->
-        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
-
-        <!-- Sujet du mail reçu côté Formspree -->
-        <input type="hidden" name="_subject" value="Nouveau contact depuis le site" />
-
         <div class="flex items-start gap-3">
           <input type="checkbox" id="consent" name="consent" required
             class="mt-1 h-4 w-4 rounded border-brand-300 text-accent-500 focus:ring-accent-500"
@@ -77,7 +70,7 @@ const isConfigured = true
           </label>
         </div>
 
-        <button type="submit" class="btn-primary" disabled={!isConfigured}>
+        <button type="submit" id="submit-btn" class="btn-primary">
           Envoyer le message
         </button>
       </form>
@@ -85,3 +78,37 @@ const isConfigured = true
   </section>
 
 </BaseLayout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const successEl = document.getElementById('form-success') as HTMLElement;
+  const errorEl = document.getElementById('form-error') as HTMLElement;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Envoi en cours…';
+    successEl.classList.add('hidden');
+    errorEl.classList.add('hidden');
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: new FormData(form),
+      });
+      const json = await res.json();
+      if (json.success) {
+        successEl.classList.remove('hidden');
+        form.reset();
+      } else {
+        errorEl.classList.remove('hidden');
+      }
+    } catch {
+      errorEl.classList.remove('hidden');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Envoyer le message';
+    }
+  });
+</script>
