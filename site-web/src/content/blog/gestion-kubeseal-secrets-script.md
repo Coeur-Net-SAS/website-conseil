@@ -4,6 +4,7 @@ description: "Un script Bash pour automatiser les opérations courantes avec kub
 publishDate: 2026-07-07
 author: "Cabinet conseil"
 tags: ["Kubernetes", "kubeseal", "Sealed Secrets", "GitOps", "Sécurité"]
+cover: "/images/blog/gestion-kubeseal-secrets-script.svg"
 ---
 
 ## Contexte et objectif

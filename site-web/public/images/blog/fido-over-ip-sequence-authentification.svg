@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 700" font-family="Inter, system-ui, sans-serif">
+  <rect x="0" y="0" width="1040" height="700" fill="#ffffff"/>
+
+  <!-- Lifelines -->
+  <line x1="120" y1="80" x2="120" y2="640" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 4"/>
+  <line x1="400" y1="80" x2="400" y2="640" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 4"/>
+  <line x1="680" y1="80" x2="680" y2="640" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 4"/>
+  <line x1="940" y1="80" x2="940" y2="640" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 4"/>
+
+  <!-- Lifeline headers -->
+  <g>
+    <rect x="30" y="20" width="180" height="50" rx="8" fill="#1f3a5f"/>
+    <text x="120" y="50" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="600">Windows</text>
+  </g>
+  <g>
+    <rect x="290" y="20" width="220" height="50" rx="8" fill="#1f3a5f"/>
+    <text x="400" y="50" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="600">Liaison USB/IP</text>
+  </g>
+  <g>
+    <rect x="590" y="20" width="180" height="50" rx="8" fill="#0f766e"/>
+    <text x="680" y="50" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="600">Clé FIDO2</text>
+  </g>
+  <g>
+    <rect x="820" y="20" width="220" height="50" rx="8" fill="#0f766e"/>
+    <text x="940" y="43" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="600">Déclencheur</text>
+    <text x="940" y="62" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="600">+ Moteur</text>
+  </g>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+  </defs>
+
+  <!-- Step 1 : Windows -> Liaison -->
+  <line x1="120" y1="115" x2="392" y2="115" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="130" y="102" font-size="14" font-weight="600" fill="#1f3a5f">1 — authenticatorGetAssertion</text>
+  <text x="130" y="132" font-size="12" font-style="italic" fill="#64748b">envoyé au pilote usbip-win</text>
+
+  <!-- Step 1bis : Liaison -> Clé FIDO2 -->
+  <line x1="400" y1="165" x2="672" y2="165" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="410" y="152" font-size="13" fill="#334155">relayé en paquets USB bruts,</text>
+  <text x="410" y="182" font-size="13" fill="#334155">sans traduction du contenu</text>
+
+  <!-- Step 2 : self-loop at Clé FIDO2 -->
+  <path d="M680,215 C 760,215 760,255 680,255" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="700" y="210" font-size="14" font-weight="600" fill="#0f766e">2 — requête reçue</text>
+  <text x="700" y="270" font-size="12" font-style="italic" fill="#64748b">la clé attend un contact humain</text>
+
+  <!-- Step 3 : Windows (service) -> Déclencheur, long crossing arrow -->
+  <line x1="120" y1="330" x2="932" y2="330" stroke="#334155" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#arrow)"/>
+  <text x="130" y="317" font-size="14" font-weight="600" fill="#1f3a5f">3 — GET /move?motor=N</text>
+  <text x="770" y="317" font-size="12" font-style="italic" fill="#64748b">reçu par le contrôleur</text>
+
+  <!-- Step 4 : Déclencheur -> Clé FIDO2 -->
+  <line x1="940" y1="390" x2="688" y2="390" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="700" y="377" font-size="14" font-weight="600" fill="#0f766e">4 — contact physique</text>
+  <text x="750" y="407" font-size="12" font-style="italic" fill="#64748b">le servo-moteur presse le bouton</text>
+
+  <!-- Step 5 : self-loop at Clé FIDO2 -->
+  <path d="M680,440 C 760,440 760,480 680,480" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="700" y="435" font-size="14" font-weight="600" fill="#0f766e">5 — contact détecté</text>
+  <text x="700" y="495" font-size="12" font-style="italic" fill="#64748b">la clé signe l'assertion</text>
+
+  <!-- Step 6 : Clé FIDO2 -> Liaison -> Windows -->
+  <line x1="680" y1="545" x2="408" y2="545" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="420" y="532" font-size="13" fill="#334155">réponse CTAP2, en paquets USB</text>
+  <text x="420" y="562" font-size="13" fill="#334155">relayés dans l'autre sens</text>
+
+  <line x1="400" y1="595" x2="128" y2="595" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="140" y="582" font-size="14" font-weight="600" fill="#1f3a5f">6 — assertion vérifiée</text>
+  <text x="140" y="612" font-size="12" font-style="italic" fill="#64748b">la cérémonie WebAuthn se termine</text>
+
+  <!-- Footer note -->
+  <line x1="30" y1="655" x2="1010" y2="655" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="520" y="680" text-anchor="middle" font-size="13" fill="#94a3b8">
+    Étapes 1, 2 et 6 transitent par la liaison USB/IP · étapes 3 à 5 n'empruntent jamais ce chemin
+  </text>
+</svg>
