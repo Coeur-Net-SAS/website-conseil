@@ -11,44 +11,111 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <section>
     <div class="container-prose py-12 text-brand-200 leading-relaxed space-y-6">
-      <p>
-        Cette page décrit comment sont collectées et traitées les données fournies via le
-        formulaire de contact, dans le respect du Règlement Général sur la Protection des
-        Données (RGPD).
-      </p>
-
       <div>
-        <h2 class="text-xl font-semibold text-white">Données collectées</h2>
+        <h2 class="text-xl font-semibold text-white">1. Responsable du traitement</h2>
         <p class="mt-2">
-          Lors de l'envoi du formulaire de contact, les informations suivantes sont collectées :
-          nom, adresse e-mail, entreprise (optionnel) et message. Aucune donnée n'est collectée
-          en dehors de cette démarche volontaire.
+          Le responsable du traitement des données personnelles collectées sur ce site est :
+        </p>
+        <p class="mt-2">
+          Cœur Net<br />
+          Adresse e-mail de contact : <a href="mailto:contact@coeur-net.fr" class="text-accent-500 hover:underline">contact@coeur-net.fr</a>
         </p>
       </div>
 
       <div>
-        <h2 class="text-xl font-semibold text-white">Finalité du traitement</h2>
+        <h2 class="text-xl font-semibold text-white">2. Données collectées</h2>
         <p class="mt-2">
-          Ces données sont utilisées uniquement pour répondre à votre demande. Elles ne sont
-          ni revendues, ni partagées avec des tiers à des fins commerciales.
+          Lorsque vous utilisez le formulaire de contact, les informations suivantes peuvent être
+          collectées :
+        </p>
+        <ul class="mt-2 list-disc pl-5 space-y-1">
+          <li>Nom et prénom (si fournis)</li>
+          <li>Adresse e-mail</li>
+          <li>Message ou demande envoyée</li>
+        </ul>
+        <p class="mt-2">
+          Aucune autre donnée personnelle n'est collectée sans votre consentement.
         </p>
       </div>
 
       <div>
-        <h2 class="text-xl font-semibold text-white">Sous-traitant</h2>
+        <h2 class="text-xl font-semibold text-white">3. Finalité du traitement</h2>
+        <p class="mt-2">Ces données sont collectées uniquement afin de :</p>
+        <ul class="mt-2 list-disc pl-5 space-y-1">
+          <li>Répondre à vos demandes de contact ou d'information,</li>
+          <li>Assurer le suivi des échanges entre vous et Cœur Net.</li>
+        </ul>
         <p class="mt-2">
-          Le formulaire est traité par Formspree (Formspree, Inc., États-Unis). Les données
-          transitent par leurs serveurs avant d'être transmises par e-mail. Plus d'informations
-          sur leur politique : <a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener" class="text-accent-500 hover:underline">formspree.io</a>.
+          Elles ne sont en aucun cas utilisées à des fins commerciales ni transmises à des tiers
+          sans votre accord préalable.
         </p>
       </div>
 
       <div>
-        <h2 class="text-xl font-semibold text-white">Vos droits</h2>
+        <h2 class="text-xl font-semibold text-white">4. Base légale du traitement</h2>
         <p class="mt-2">
-          Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de
-          suppression de vos données. Pour exercer ces droits, contactez-nous via le
-          <a href="/contact" class="text-accent-500 hover:underline">formulaire de contact</a>.
+          Le traitement de vos données repose sur votre consentement, exprimé en soumettant le
+          formulaire de contact.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-white">5. Durée de conservation</h2>
+        <p class="mt-2">
+          Les données issues du formulaire de contact sont conservées pendant 12 mois, puis
+          automatiquement supprimées.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-white">6. Hébergement des données</h2>
+        <p class="mt-2">Le site Cœur Net est hébergé par :</p>
+        <p class="mt-2">
+          GitHub, Inc.<br />
+          88 Colin P. Kelly Jr Street, San Francisco, CA 94107, États-Unis<br />
+          Téléphone : +1 877 448 4820
+        </p>
+        <p class="mt-2">
+          Certaines données techniques (logs, adresses IP, etc.) peuvent transiter via les
+          serveurs de cet hébergeur. GitHub applique des mesures de sécurité conformes aux
+          standards internationaux pour la protection des données.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-white">7. Vos droits</h2>
+        <p class="mt-2">
+          Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi
+          « Informatique et Libertés », vous disposez des droits suivants :
+        </p>
+        <ul class="mt-2 list-disc pl-5 space-y-1">
+          <li>Droit d'accès à vos données,</li>
+          <li>Droit de rectification ou d'effacement,</li>
+          <li>Droit d'opposition au traitement,</li>
+          <li>Droit à la limitation du traitement,</li>
+          <li>Droit à la portabilité des données.</li>
+        </ul>
+        <p class="mt-2">
+          Pour exercer ces droits, contactez-nous à l'adresse suivante :
+          <a href="mailto:contact@coeur-net.fr" class="text-accent-500 hover:underline">contact@coeur-net.fr</a>.
+          Une réponse vous sera adressée dans un délai maximum d'un mois.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-white">8. Sécurité des données</h2>
+        <p class="mt-2">
+          Cœur Net met en œuvre toutes les mesures techniques et organisationnelles nécessaires
+          pour assurer la sécurité et la confidentialité des données personnelles traitées.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-white">9. Cookies</h2>
+        <p class="mt-2">
+          Le site Cœur Net n'utilise aucun cookie de suivi, de mesure d'audience ou à des fins
+          publicitaires. Seuls des cookies strictement techniques et temporaires peuvent être
+          utilisés afin d'assurer le bon fonctionnement du site.
         </p>
       </div>
     </div>
