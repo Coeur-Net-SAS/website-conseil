@@ -1,0 +1,311 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Contenu issu de la plaquette cyber (octobre 2026).
+// Ancres : #approche, #pole-a, #pole-b, #pole-c, #engagements, #gti, #tarifs, #referentiels
+
+const nistSteps = [
+  { n: 1, title: 'Gouverner', desc: 'Stratégie, politiques, conformité',  poles: 'Pôle A' },
+  { n: 2, title: 'Identifier', desc: 'Actifs, risques, vulnérabilités',   poles: 'Pôle A · B' },
+  { n: 3, title: 'Protéger',  desc: 'Durcissement, accès, sauvegardes',   poles: 'Pôle B' },
+  { n: 4, title: 'Détecter',  desc: 'Supervision, alertes',               poles: 'Pôle B' },
+  { n: 5, title: 'Répondre',  desc: 'Gestion de crise, analyse',          poles: 'Pôle C' },
+  { n: 6, title: 'Rétablir',  desc: 'Remise en service, PRA',             poles: 'Pôle B · C' },
+];
+
+const poles = [
+  {
+    id: 'pole-a',
+    letter: 'A',
+    title: 'Conseil GRC et conformité',
+    missions: [
+      { title: 'Accompagnement ISO/IEC 27001', desc: 'Analyse d’écart, analyse de risques, rédaction du SMSI et des politiques, préparation à l’audit de certification.' },
+      { title: 'Accompagnement ISO/IEC 42001', desc: 'Gouvernance des systèmes d’IA, analyse d’impact, politiques d’usage de l’IA en entreprise.' },
+      { title: 'Accompagnement HDS et RGPD',   desc: 'Analyse d’écart au référentiel HDS, mise en conformité RGPD avec notre DPO certifiée, plan d’action priorisé.' },
+      { title: 'RSSI partagé',                 desc: 'Abonnement mensuel : pilotage de la sécurité, suivi du plan d’action, maintien en conformité, PCA / PRA.' },
+    ],
+  },
+  {
+    id: 'pole-b',
+    letter: 'B',
+    title: 'Sécurisation, installation et maintenance',
+    missions: [
+      { title: 'Migration cloud sécurisée',         desc: 'Conception de l’architecture, migration, durcissement, gestion des identités et des accès.' },
+      { title: 'Analyse de vulnérabilités',         desc: 'Scans, analyse du code et des dépendances, priorisation et correction des failles, rapport de remédiation.' },
+      { title: 'Mise en place PCA / PRA',           desc: 'Sauvegardes, réplication, procédures de reprise et tests de restauration documentés.' },
+      { title: 'Maintien en condition de sécurité', desc: 'Mises à jour, supervision, vérification des sauvegardes, revue des accès, rapport périodique.' },
+    ],
+  },
+];
+
+const incidentSteps = [
+  { title: 'Qualifier',   desc: 'Périmètre, gravité, premières mesures' },
+  { title: 'Contenir',    desc: 'Isoler, couper la propagation' },
+  { title: 'Analyser',    desc: 'Preuves, vecteur d’attaque, chronologie' },
+  { title: 'Éradiquer',   desc: 'Supprimer l’accès de l’attaquant' },
+  { title: 'Rétablir',    desc: 'Reconstruire, restaurer, durcir' },
+  { title: 'Capitaliser', desc: 'Rapport, actions correctives' },
+];
+
+const engagements = [
+  { title: 'Autorisation écrite',  desc: 'Aucune intervention technique sans périmètre défini et validé par écrit.' },
+  { title: 'Sauvegarde vérifiée',  desc: 'Contrôle d’une sauvegarde exploitable avant toute modification en production.' },
+  { title: 'Traçabilité',          desc: 'Journal des actions réalisées, remis avec le rapport d’intervention.' },
+  { title: 'Confidentialité',      desc: 'Accès nominatifs, authentification forte, suppression des données en fin de mission.' },
+  { title: 'Preuves préservées',   desc: 'Méthodes de collecte et de conservation garantissant l’intégrité des preuves.' },
+  { title: 'Rapport systématique', desc: 'Constats, solutions mises en œuvre et actions correctives recommandées.' },
+];
+
+const gti = [
+  { zone: 'À distance',         scope: 'Toute la France',        delay: '< 1 h', desc: 'Rappel, qualification et premières mesures de confinement', highlight: true },
+  { zone: 'Métropole de Lyon',  scope: 'Rayon de 100 km',        delay: '< 4 h', desc: 'Intervention sur site' },
+  { zone: 'Côte d’Azur',        scope: 'Rayon de 100 km',        delay: '< 4 h', desc: 'Intervention sur site' },
+  { zone: 'Vierzon et Cher',    scope: '40 km autour du siège',  delay: 'J+1',   desc: 'Sur site, le jour ouvré suivant' },
+];
+
+const referentiels = [
+  {
+    title: 'ANSSI',
+    items: [
+      'Guide d’hygiène informatique',
+      'EBIOS Risk Manager',
+      'Crise d’origine cyber : les clés d’une gestion opérationnelle et stratégique',
+      'Guides « Cyberattaques et remédiation »',
+    ],
+  },
+  {
+    title: 'NIST',
+    items: [
+      'Cybersecurity Framework (CSF) 2.0',
+      'SP 800-61 Rev. 3 : réponse à incident',
+      'SP 800-86 : forensique et réponse à incident',
+      'SP 800-34 : plans de continuité',
+    ],
+  },
+  {
+    title: 'Normes et réglementation',
+    items: [
+      'ISO/IEC 27001:2022',
+      'ISO/IEC 42001:2023',
+      'Référentiel HDS',
+      'RGPD',
+      'Recommandations de Cybermalveillance.gouv.fr',
+    ],
+  },
+];
+---
+
+<BaseLayout title="Cybersécurité" description="Cybersécurité pour les PME et ETI : conseil GRC et conformité, sécurisation et maintenance, réponse à incident. Délais d'intervention garantis et tarifs transparents.">
+
+  <!-- HERO -->
+  <section class="border-b border-brand-700">
+    <div class="container-page py-16 lg:py-20">
+      <p class="text-sm uppercase tracking-wider text-accent-500 font-medium mb-4">
+        Offre cybersécurité · PME et ETI
+      </p>
+      <h1 class="text-4xl sm:text-5xl font-bold leading-tight max-w-3xl">
+        Cybersécurité pour les PME et ETI.
+      </h1>
+      <p class="mt-6 text-lg text-brand-300 leading-relaxed max-w-2xl">
+        De la mise en conformité à la gestion de crise cyber : des ingénieurs en sécurité
+        informatique protègent votre système d'information, avec des
+        <strong class="text-white">délais d'intervention garantis</strong> et des
+        <strong class="text-white">tarifs transparents</strong>.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-2">
+        <a href="#pole-a" class="text-xs font-mono px-2 py-1 rounded bg-brand-900 text-brand-200 border border-brand-700 hover:border-accent-500">Conseil et conformité</a>
+        <a href="#pole-b" class="text-xs font-mono px-2 py-1 rounded bg-brand-900 text-brand-200 border border-brand-700 hover:border-accent-500">Sécurisation et maintenance</a>
+        <a href="#pole-c" class="text-xs font-mono px-2 py-1 rounded bg-brand-900 text-brand-200 border border-brand-700 hover:border-accent-500">Réponse à incident</a>
+      </div>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/contact" class="btn-primary">Parlons de votre sécurité</a>
+        <a href="tel:+33670965109" class="btn-secondary">Urgence : +33 6 70 96 51 09</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROCHE NIST CSF 2.0 -->
+  <section id="approche" class="border-b border-brand-700 scroll-mt-24">
+    <div class="container-page py-16">
+      <p class="text-sm uppercase tracking-wider text-accent-500 font-semibold">Notre approche</p>
+      <h2 class="mt-2 text-2xl sm:text-3xl font-bold">Une approche structurée par le NIST CSF 2.0.</h2>
+      <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
+        {nistSteps.map(({ n, title, desc, poles }) => (
+          <div class="rounded-lg border border-brand-700 bg-brand-900 p-5 flex flex-col">
+            <p class="text-3xl font-bold text-accent-500">{n}</p>
+            <h3 class="mt-3 font-semibold">{title}</h3>
+            <p class="mt-1 text-sm text-brand-300 flex-1">{desc}</p>
+            <p class="mt-4 text-xs font-semibold text-accent-500">{poles}</p>
+          </div>
+        ))}
+      </div>
+      <p class="mt-6 text-sm text-brand-300">
+        <strong class="text-white">Pôle A</strong> Conseil GRC et conformité ·
+        <strong class="text-white">Pôle B</strong> Sécurisation, installation et maintenance ·
+        <strong class="text-white">Pôle C</strong> Réponse à incident
+      </p>
+    </div>
+  </section>
+
+  <!-- POLES A et B -->
+  {poles.map(({ id, letter, title, missions }) => (
+    <section id={id} class="border-b border-brand-700 scroll-mt-24">
+      <div class="container-page py-16">
+        <p class="text-sm uppercase tracking-wider text-accent-500 font-semibold">Nos missions</p>
+        <h2 class="mt-2 text-2xl sm:text-3xl font-bold">Pôle {letter} — {title}</h2>
+        <div class="mt-10 grid gap-5 sm:grid-cols-2">
+          {missions.map(({ title, desc }) => (
+            <article class="rounded-lg border border-brand-700 bg-brand-900 p-6 hover:border-accent-500 transition">
+              <h3 class="font-semibold">{title}</h3>
+              <p class="mt-2 text-sm text-brand-300 leading-relaxed">{desc}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- POLE C -->
+  <section id="pole-c" class="border-b border-brand-700 scroll-mt-24">
+    <div class="container-page py-16">
+      <p class="text-sm uppercase tracking-wider text-accent-500 font-semibold">Nos missions</p>
+      <h2 class="mt-2 text-2xl sm:text-3xl font-bold">Pôle C — Réponse à incident</h2>
+      <ol class="mt-10 grid gap-4 sm:grid-cols-3 lg:grid-cols-6">
+        {incidentSteps.map(({ title, desc }, i) => (
+          <li class="text-center">
+            <span class:list={[
+              'mx-auto flex h-12 w-12 items-center justify-center rounded-full text-lg font-bold text-white',
+              i < 2 ? 'bg-brand-800 border border-accent-500' : 'bg-accent-500',
+            ]}>{i + 1}</span>
+            <h3 class="mt-3 font-semibold">{title}</h3>
+            <p class="mt-1 text-sm text-brand-300">{desc}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="mt-10 rounded-lg border border-brand-700 bg-brand-900 p-6">
+        <h3 class="font-semibold">Analyse post-mortem et forensique</h3>
+        <p class="mt-2 text-sm text-brand-300 leading-relaxed">
+          Copie et analyse des supports, chronologie des faits, conservation des preuves pour
+          une contre-expertise ou une procédure judiciaire. Rapport remis au client et, si
+          besoin, présenté aux avocats ou à la juridiction.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENGAGEMENTS -->
+  <section id="engagements" class="border-b border-brand-700 bg-brand-900/40 scroll-mt-24">
+    <div class="container-page py-16">
+      <p class="text-sm uppercase tracking-wider text-accent-500 font-semibold">Nos engagements</p>
+      <h2 class="mt-2 text-2xl sm:text-3xl font-bold">Un cadre d'intervention qui protège votre SI.</h2>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {engagements.map(({ title, desc }) => (
+          <div class="rounded-lg border border-brand-700 bg-brand-900 p-6">
+            <h3 class="font-semibold">{title}</h3>
+            <p class="mt-2 text-sm text-brand-300 leading-relaxed">{desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- GTI -->
+  <section id="gti" class="border-b border-brand-700 scroll-mt-24">
+    <div class="container-page py-16">
+      <p class="text-sm uppercase tracking-wider text-accent-500 font-semibold">Nos engagements</p>
+      <h2 class="mt-2 text-2xl sm:text-3xl font-bold">Délais d'intervention garantis (GTI).</h2>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {gti.map(({ zone, scope, delay, desc, highlight }) => (
+          <div class:list={[
+            'rounded-lg border p-6',
+            highlight ? 'border-accent-500 bg-brand-800' : 'border-brand-700 bg-brand-900',
+          ]}>
+            <h3 class="font-semibold">{zone}</h3>
+            <p class="text-sm text-brand-400">{scope}</p>
+            <p class="mt-4 text-4xl font-bold text-accent-500">{delay}</p>
+            <p class="mt-2 text-sm text-brand-300">{desc}</p>
+          </div>
+        ))}
+      </div>
+      <p class="mt-6 text-sm text-brand-300 leading-relaxed max-w-4xl">
+        <strong class="text-white">Conditions.</strong> Délais en heures ouvrées (jours ouvrés,
+        9 h – 18 h), décomptés à partir de la validation écrite de la demande. En dehors de ces
+        plages, intervention selon disponibilité au tarif majoré. Hors zones : délai fixé au
+        devis. Si nos deux intervenants sont déjà mobilisés ou indisponibles (mission en cours,
+        maladie…), nous en informons immédiatement le client et l'orientons vers
+        <a href="https://www.cybermalveillance.gouv.fr" class="text-accent-500 hover:underline" rel="noopener" target="_blank">Cybermalveillance.gouv.fr</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- TARIFS -->
+  <section id="tarifs" class="border-b border-brand-700 scroll-mt-24">
+    <div class="container-page py-16">
+      <p class="text-sm uppercase tracking-wider text-accent-500 font-semibold">Nos tarifs — par intervenant</p>
+      <h2 class="mt-2 text-2xl sm:text-3xl font-bold">Des tarifs transparents.</h2>
+      <div class="mt-10 grid gap-5 lg:grid-cols-2">
+        <div class="rounded-lg border border-accent-500 bg-brand-800 p-8">
+          <p class="text-sm font-semibold text-brand-200">Taux horaire</p>
+          <p class="mt-2 text-white"><span class="text-5xl font-bold">125 €</span> <span class="text-brand-200">HT / heure</span></p>
+          <ul class="mt-6 space-y-2 text-sm text-brand-200">
+            <li class="pl-5 relative"><span class="absolute left-0 top-2 h-1.5 w-1.5 rounded-full bg-accent-500"></span>Durée minimale facturée : 4 heures</li>
+            <li class="pl-5 relative"><span class="absolute left-0 top-2 h-1.5 w-1.5 rounded-full bg-accent-500"></span>Temps de trajet facturé au taux horaire</li>
+            <li class="pl-5 relative"><span class="absolute left-0 top-2 h-1.5 w-1.5 rounded-full bg-accent-500"></span>Nuit (20 h – 8 h) : + 50 %</li>
+            <li class="pl-5 relative"><span class="absolute left-0 top-2 h-1.5 w-1.5 rounded-full bg-accent-500"></span>Week-end et jours fériés : + 50 %</li>
+            <li class="pl-5 relative"><span class="absolute left-0 top-2 h-1.5 w-1.5 rounded-full bg-accent-500"></span>Urgence : × 2 sur les heures de la période d'urgence, trajets compris, après majoration nuit ou week-end</li>
+          </ul>
+        </div>
+        <div class="grid gap-5">
+          <div class="rounded-lg border border-brand-700 bg-brand-900 p-6">
+            <h3 class="font-semibold">Analyse post-incident simple <span class="text-accent-500">3 000 € HT</span></h3>
+            <p class="mt-2 text-sm text-brand-300">Forfait de 3 jours : analyse, solutions et actions correctives, rapport.</p>
+          </div>
+          <div class="rounded-lg border border-brand-700 bg-brand-900 p-6">
+            <h3 class="font-semibold">RSSI partagé <span class="text-accent-500">dès 1 000 € HT / mois</span></h3>
+            <p class="mt-2 text-sm text-brand-300">Abonnement ajusté au besoin, à partir d'1 jour par mois.</p>
+          </div>
+          <div class="rounded-lg border border-brand-700 bg-brand-900 p-6">
+            <h3 class="font-semibold">Frais de déplacement <span class="text-accent-500">au réel</span></h3>
+            <p class="mt-2 text-sm text-brand-300">Indemnités kilométriques au barème fiscal (4 CV : 0,606 €/km), nuit d'hôtel 130 €. Hors majoration urgence.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFERENTIELS -->
+  <section id="referentiels" class="border-b border-brand-700 scroll-mt-24">
+    <div class="container-page py-16">
+      <p class="text-sm uppercase tracking-wider text-accent-500 font-semibold">Nos référentiels</p>
+      <h2 class="mt-2 text-2xl sm:text-3xl font-bold">Des méthodes fondées sur des référentiels reconnus.</h2>
+      <div class="mt-10 grid gap-5 lg:grid-cols-3">
+        {referentiels.map(({ title, items }) => (
+          <div class="rounded-lg border border-brand-700 bg-brand-900 p-6">
+            <h3 class="font-semibold">{title}</h3>
+            <ul class="mt-4 space-y-2 text-sm text-brand-200">
+              {items.map((item) => (
+                <li class="pl-5 relative">
+                  <span class="absolute left-0 top-2 h-1.5 w-1.5 rounded-full bg-accent-500"></span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-brand-900">
+    <div class="container-page py-16 text-center">
+      <h2 class="text-3xl font-bold text-white">Parlons de votre sécurité</h2>
+      <p class="mt-3 text-brand-300">
+        <a href="mailto:contact@coeur-net.fr" class="text-accent-500 hover:underline">contact@coeur-net.fr</a>
+        · <a href="tel:+33670965109" class="text-accent-500 hover:underline">+33 6 70 96 51 09</a>
+      </p>
+      <a href="/contact" class="mt-6 inline-flex btn-primary">Prendre contact</a>
+    </div>
+  </section>
+
+</BaseLayout>

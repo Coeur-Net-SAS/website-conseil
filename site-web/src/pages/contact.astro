@@ -17,6 +17,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section>
     <div class="container-prose py-12">
 
+      <div class="mb-10 grid gap-4 sm:grid-cols-2">
+        <div class="rounded-lg border border-brand-700 bg-brand-900 p-5 text-sm">
+          <p class="font-semibold text-white">Coordonnées</p>
+          <p class="mt-2"><a href="mailto:contact@coeur-net.fr" class="text-accent-500 hover:underline">contact@coeur-net.fr</a></p>
+          <p><a href="tel:+33670965109" class="text-accent-500 hover:underline">+33 6 70 96 51 09</a></p>
+          <p class="mt-2 text-brand-300">B3 Village by CA, rue de la Société Française, 18100 Vierzon</p>
+        </div>
+        <div class="rounded-lg border border-accent-500 bg-brand-800 p-5 text-sm">
+          <p class="font-semibold text-white">Incident en cours ?</p>
+          <p class="mt-2 text-brand-200">
+            Appelez-nous directement : rappel, qualification et premières mesures de
+            confinement en moins d'une heure (heures ouvrées).
+            <a href="/cybersecurite#gti" class="text-accent-500 hover:underline">Voir nos délais garantis</a>.
+          </p>
+        </div>
+      </div>
+
       <div id="form-success" class="hidden mb-6 rounded-md border border-green-700 bg-green-900/30 p-4 text-sm text-green-300">
         Message envoyé. Nous vous répondons sous 48 heures ouvrées.
       </div>

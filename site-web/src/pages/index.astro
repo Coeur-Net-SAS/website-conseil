@@ -10,6 +10,13 @@ const modernizationDomains = [
   { title: 'Administration système',        desc: 'GPO, jointure annuaire cloud, gestion fine des identités au quotidien.',                       image: '/images/expertise/08-administration.jpg',  imageAlt: 'Administration et integration aux annuaires cloud.' },
 ];
 
+// Offre cybersecurite : 3 poles (cf. /cybersecurite)
+const cyberPoles = [
+  { letter: 'A', title: 'Conseil GRC et conformité',   desc: 'ISO 27001, ISO 42001, HDS, RGPD avec notre DPO certifiée, RSSI partagé.',                              href: '/cybersecurite#pole-a' },
+  { letter: 'B', title: 'Sécurisation et maintenance', desc: 'Migration cloud sécurisée, analyse de vulnérabilités, PCA / PRA, maintien en condition de sécurité.', href: '/cybersecurite#pole-b' },
+  { letter: 'C', title: 'Réponse à incident',          desc: 'Gestion de crise, confinement, remise en service, analyse post-mortem et forensique.',               href: '/cybersecurite#pole-c' },
+];
+
 ---
 
 <BaseLayout title="Accueil" description="Coeur-Net : conseil en gouvernance, conformite (GRC, RGPD, ISO 27001, ISO 42001) et modernisation IT, soutenu par une R&D propre en biometrie cardiaque.">
@@ -63,6 +70,57 @@ const modernizationDomains = [
           cette expertise au plus grand nombre, autour de la <strong class="text-white">GRC</strong>
           et de la <strong class="text-white">modernisation IT</strong>.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       OFFRE CYBERSECURITE : 3 poles + GTI (plaquette cyber)
+       ==================================================================== -->
+  <section class="border-b border-brand-700">
+    <div class="container-page py-20">
+      <div class="max-w-2xl">
+        <p class="text-sm uppercase tracking-wider text-accent-500 font-semibold">
+          Cybersécurité pour les PME et ETI
+        </p>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-bold">
+          De la mise en conformité à la gestion de crise cyber.
+        </h2>
+        <p class="mt-3 text-brand-300">
+          Trois pôles d'expertise structurés par le NIST CSF 2.0, portés par des ingénieurs
+          en sécurité informatique.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-5 lg:grid-cols-3">
+        {cyberPoles.map(({ letter, title, desc, href }) => (
+          <a href={href} class="rounded-lg border border-brand-700 bg-brand-900 p-6 hover:border-accent-500 transition block">
+            <p class="text-sm font-mono text-accent-500">Pôle {letter}</p>
+            <h3 class="mt-2 font-semibold">{title}</h3>
+            <p class="mt-2 text-sm text-brand-300 leading-relaxed">{desc}</p>
+          </a>
+        ))}
+      </div>
+
+      <div class="mt-8 grid gap-5 sm:grid-cols-3">
+        <div class="rounded-lg border border-accent-500 bg-brand-800 p-5">
+          <p class="text-3xl font-bold text-accent-500">&lt; 1 h</p>
+          <p class="mt-1 text-sm text-brand-200">Rappel et premières mesures de confinement, à distance, partout en France</p>
+        </div>
+        <div class="rounded-lg border border-brand-700 bg-brand-900 p-5">
+          <p class="text-3xl font-bold text-accent-500">&lt; 4 h</p>
+          <p class="mt-1 text-sm text-brand-300">Sur site autour de Lyon et sur la Côte d'Azur (100 km)</p>
+        </div>
+        <div class="rounded-lg border border-brand-700 bg-brand-900 p-5">
+          <p class="text-sm text-brand-300">À partir de</p>
+          <p class="text-3xl font-bold text-accent-500">125 € HT / h</p>
+          <p class="mt-1 text-sm text-brand-300">Par intervenant, tarifs transparents</p>
+        </div>
+      </div>
+
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a href="/cybersecurite" class="btn-primary">Découvrir l'offre cybersécurité</a>
+        <a href="/cybersecurite#gti" class="btn-secondary">Délais d'intervention garantis</a>
       </div>
     </div>
   </section>
