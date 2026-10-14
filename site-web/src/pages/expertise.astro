@@ -4,8 +4,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 // Ordre revu :
 //   1.  GRC                                                     [vedette]
 //   2.  Aide au financement public                              [vedette]
-//   3-7. Modernisation : cloud, securite, CI/CD, IA gen., admin
-//   8-9. R&D heritage : recherche IA & modeles, IAM biometrie
+//   3-4. Modernisation : cloud, securite
+//   5.  Reponse a incident & forensique (pole C de /cybersecurite)
+//   6-8. Modernisation : CI/CD, IA gen., admin
+//   9-10. R&D heritage : recherche IA & modeles, IAM biometrie
 //
 // Les ancres #grc, #financement, #recherche-ia, #iam-biometrie permettent
 // les liens internes depuis l'accueil et le footer.
@@ -24,8 +26,12 @@ const domains = [
       'Préparation ISO/IEC 27001 : SMSI, contrôles Annexe A, déclaration d’applicabilité.',
       'Préparation ISO/IEC 42001 : management de l’IA, contrôles spécifiques aux systèmes IA.',
       'Politique de sécurité, classification des données, plan de continuité d’activité.',
+      'Accompagnement HDS : analyse d’écart au référentiel Hébergeur de Données de Santé, plan d’action priorisé.',
+      'Analyse de risques selon EBIOS Risk Manager (ANSSI).',
+      'RSSI partagé : abonnement mensuel pour piloter la sécurité, suivre le plan d’action et maintenir la conformité.',
     ],
-    stack: ['ISO 27001', 'ISO 42001', 'RGPD', 'NIST CSF', 'AIPD', 'Politique SSI'],
+    stack: ['ISO 27001', 'ISO 42001', 'RGPD', 'HDS', 'EBIOS RM', 'NIST CSF', 'AIPD', 'RSSI partagé'],
+    link: { href: '/cybersecurite#pole-a', label: 'Voir l’offre cybersécurité — pôle conseil →' },
   },
   {
     id: 'financement',
@@ -64,12 +70,32 @@ const domains = [
     imageAlt: "Chaine de protection : sauvegardes, scan de vulnerabilites, threat modeling.",
     intro: "Réduire la surface d'attaque, documenter les menaces, sécuriser les accès et garantir la continuité d'activité.",
     points: [
-      'Plan de reprise d’activité (sauvegardes Velero, stockage objet S3-compatible).',
+      'PCA / PRA : sauvegardes, réplication, procédures de reprise et tests de restauration documentés.',
+      'Migration cloud sécurisée : conception de l’architecture, durcissement, gestion des identités et des accès.',
+      'Analyse de vulnérabilités : scans, analyse du code et des dépendances, priorisation et rapport de remédiation.',
+      'Maintien en condition de sécurité : mises à jour, supervision, vérification des sauvegardes, revue des accès, rapport périodique.',
       'Threat modeling et sensibilisation des équipes métier.',
-      'Étude comparative et exploitation de scanners de vulnérabilités.',
       'Analyse SCA intégrée à la CI/CD (shift-left).',
     ],
-    stack: ['Velero', 'MinIO', 'Trivy', 'OpenVAS', 'GPO', 'Threat modeling'],
+    stack: ['Velero', 'MinIO', 'Trivy', 'OpenVAS', 'GPO', 'Threat modeling', 'MCS'],
+    link: { href: '/cybersecurite#pole-b', label: 'Voir l’offre cybersécurité — pôle sécurisation →' },
+  },
+  {
+    id: 'reponse-incident',
+    title: 'Réponse à incident & forensique',
+    image: '/images/expertise/10-reponse-incident.png',
+    imageAlt: "Serveur compromis par une intrusion, protege par un bouclier de securite.",
+    imageContain: true,
+    intro: "Gérer une crise cyber de bout en bout, de la qualification de l’incident à la remise en service, avec des délais d’intervention garantis et des preuves préservées.",
+    points: [
+      'Qualification, confinement et premières mesures en moins d’une heure, à distance.',
+      'Intervention sur site sous 4 h autour de Lyon et sur la Côte d’Azur, J+1 dans le Cher.',
+      'Analyse du vecteur d’attaque, éradication de l’accès de l’attaquant, reconstruction et durcissement du SI.',
+      'Analyse post-mortem et forensique : copie des supports, chronologie, conservation des preuves pour une contre-expertise ou une procédure judiciaire.',
+      'Rapport d’incident et actions correctives, présentable aux avocats ou à la juridiction.',
+    ],
+    stack: ['NIST SP 800-61', 'NIST SP 800-86', 'ANSSI', 'Forensique', 'Gestion de crise'],
+    link: { href: '/cybersecurite#pole-c', label: 'Voir le détail et nos délais garantis →' },
   },
   {
     id: 'cicd',
@@ -153,8 +179,10 @@ const domains = [
     <div class="container-page py-16">
       <h1 class="text-4xl sm:text-5xl font-bold">Nos expertises</h1>
       <p class="mt-4 text-lg text-brand-300 max-w-2xl">
-        La <strong class="text-white">GRC</strong> au centre, soutenue par cinq expertises
-        de modernisation IT. Nous proposons aussi une aide à l'activation des
+        La <strong class="text-white">GRC</strong> au centre, soutenue par nos expertises
+        de modernisation IT et de <strong class="text-white">réponse à incident</strong>
+        (voir aussi notre <a href="/cybersecurite" class="text-accent-500 hover:underline">offre cybersécurité</a>).
+        Nous proposons aussi une aide à l'activation des
         <strong class="text-white">financements publics</strong>. Notre R&amp;D en
         biométrie cardiaque alimente l'ensemble.
       </p>
@@ -163,11 +191,11 @@ const domains = [
 
   <section>
     <div class="container-page py-16 space-y-20">
-      {domains.map(({ id, title, intro, points, stack, image, imageAlt, flagship, rd }, i) => (
+      {domains.map(({ id, title, intro, points, stack, image, imageAlt, imageContain, flagship, rd, link }, i) => (
         <article id={id} class="grid lg:grid-cols-3 gap-8 lg:gap-12 items-start scroll-mt-24">
           <div class="lg:col-span-1 space-y-4">
             <div class="flex items-center gap-3 flex-wrap">
-              <p class="text-sm font-mono text-accent-500">0{i + 1}</p>
+              <p class="text-sm font-mono text-accent-500">{String(i + 1).padStart(2, '0')}</p>
               {flagship && (
                 <span class="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded bg-accent-500/20 text-accent-500 border border-accent-500/40">
                   Expertise vedette
@@ -180,15 +208,20 @@ const domains = [
               )}
             </div>
             <h2 class="text-2xl font-bold">{title}</h2>
-            <img
-              src={image}
-              alt={imageAlt}
-              loading="lazy"
-              decoding="async"
-              width="1200"
-              height="630"
-              class="w-full rounded-lg border border-brand-700 bg-brand-800/60 aspect-[16/9] object-cover"
-            />
+            {image && (
+              <img
+                src={image}
+                alt={imageAlt}
+                loading="lazy"
+                decoding="async"
+                width="1200"
+                height="630"
+                class:list={[
+                  'w-full rounded-lg border border-brand-700 aspect-[16/9]',
+                  imageContain ? 'object-contain bg-black' : 'object-cover bg-brand-800/60',
+                ]}
+              />
+            )}
           </div>
           <div class="lg:col-span-2">
             <p class="text-brand-200 leading-relaxed">{intro}</p>
@@ -207,6 +240,11 @@ const domains = [
                 </span>
               ))}
             </div>
+            {link && (
+              <a href={link.href} class="mt-6 inline-flex text-accent-500 font-medium hover:underline">
+                {link.label}
+              </a>
+            )}
           </div>
         </article>
       ))}
