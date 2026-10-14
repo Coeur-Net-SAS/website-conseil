@@ -1,121 +1,171 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const linkClass = 'text-accent-500 hover:underline';
 ---
 
 <BaseLayout title="Politique de confidentialité">
   <section class="border-b border-brand-700">
     <div class="container-page py-12">
       <h1 class="text-4xl font-bold">Politique de confidentialité</h1>
+      <p class="mt-3 text-sm text-brand-400">Dernière mise à jour : 14 octobre 2026</p>
     </div>
   </section>
 
   <section>
     <div class="container-prose py-12 text-brand-200 leading-relaxed space-y-6">
+      <p>
+        Cœur-Net accorde une importance particulière à la protection de vos données personnelles.
+        La présente politique explique quelles données sont traitées lorsque vous utilisez ce site,
+        pourquoi, pendant combien de temps, et comment exercer vos droits. Elle est établie
+        conformément au Règlement (UE) 2016/679 (RGPD) et à la loi « Informatique et Libertés ».
+      </p>
+
       <div>
         <h2 class="text-xl font-semibold text-white">1. Responsable du traitement</h2>
         <p class="mt-2">
-          Le responsable du traitement des données personnelles collectées sur ce site est :
-        </p>
-        <p class="mt-2">
-          Cœur Net<br />
-          Adresse e-mail de contact : <a href="mailto:contact@coeur-net.fr" class="text-accent-500 hover:underline">contact@coeur-net.fr</a>
+          COEUR-NET, SAS au capital de 100 300 €<br />
+          Le B3 – Village by CA, rue de la Société Française, 18100 Vierzon<br />
+          RCS Bourges 922 210 430 – SIRET 922 210 430 00026 – TVA FR18 922 210 430<br />
+          Contact : <a href="mailto:contact@coeur-net.fr" class={linkClass}>contact@coeur-net.fr</a>
         </p>
       </div>
 
       <div>
-        <h2 class="text-xl font-semibold text-white">2. Données collectées</h2>
+        <h2 class="text-xl font-semibold text-white">2. Délégué à la protection des données (DPO)</h2>
         <p class="mt-2">
-          Lorsque vous utilisez le formulaire de contact, les informations suivantes peuvent être
-          collectées :
+          Cœur-Net a désigné une déléguée à la protection des données : <strong class="text-white">Caroline TORRES</strong>.
+          Vous pouvez la contacter pour toute question relative à vos données personnelles :
         </p>
         <ul class="mt-2 list-disc pl-5 space-y-1">
-          <li>Nom et prénom (si fournis)</li>
-          <li>Adresse e-mail</li>
-          <li>Message ou demande envoyée</li>
+          <li>
+            par e-mail à <a href="mailto:contact@coeur-net.fr?subject=Donn%C3%A9es%20personnelles%20%E2%80%93%20DPO" class={linkClass}>contact@coeur-net.fr</a>,
+            avec pour objet « Données personnelles – DPO » ;
+          </li>
+          <li>
+            par courrier adressé à COEUR-NET, à l'attention de la déléguée à la protection des données,
+            Le B3 – Village by CA, rue de la Société Française, 18100 Vierzon.
+          </li>
         </ul>
-        <p class="mt-2">
-          Aucune autre donnée personnelle n'est collectée sans votre consentement.
-        </p>
       </div>
 
       <div>
-        <h2 class="text-xl font-semibold text-white">3. Finalité du traitement</h2>
-        <p class="mt-2">Ces données sont collectées uniquement afin de :</p>
+        <h2 class="text-xl font-semibold text-white">3. Données traitées, finalités et bases légales</h2>
+
+        <h3 class="mt-4 font-semibold text-white">Formulaire de contact</h3>
         <ul class="mt-2 list-disc pl-5 space-y-1">
-          <li>Répondre à vos demandes de contact ou d'information,</li>
-          <li>Assurer le suivi des échanges entre vous et Cœur Net.</li>
+          <li><strong>Données :</strong> nom et prénom, adresse e-mail professionnelle, entreprise (facultatif), contenu de votre message.</li>
+          <li><strong>Finalité :</strong> répondre à votre demande et assurer le suivi de nos échanges.</li>
+          <li><strong>Base légale :</strong> mesures précontractuelles prises à votre demande et intérêt légitime de Cœur-Net à répondre aux sollicitations qui lui sont adressées (article 6.1.b et 6.1.f du RGPD).</li>
         </ul>
-        <p class="mt-2">
-          Elles ne sont en aucun cas utilisées à des fins commerciales ni transmises à des tiers
-          sans votre accord préalable.
+
+        <h3 class="mt-4 font-semibold text-white">Newsletter</h3>
+        <ul class="mt-2 list-disc pl-5 space-y-1">
+          <li><strong>Données :</strong> adresse e-mail.</li>
+          <li><strong>Finalité :</strong> vous envoyer nos notes techniques et conseils de sécurité, une à deux fois par mois.</li>
+          <li><strong>Base légale :</strong> votre consentement (article 6.1.a du RGPD), que vous pouvez retirer à tout moment grâce au lien de désinscription présent dans chaque e-mail ou en nous écrivant.</li>
+        </ul>
+
+        <h3 class="mt-4 font-semibold text-white">Données techniques de connexion</h3>
+        <ul class="mt-2 list-disc pl-5 space-y-1">
+          <li><strong>Données :</strong> adresse IP, date et heure de la requête, page consultée, type de navigateur.</li>
+          <li><strong>Finalité :</strong> assurer la sécurité et le bon fonctionnement du site. Ces journaux sont tenus par l'hébergeur ; Cœur-Net ne les exploite pas à des fins de suivi ou de mesure d'audience.</li>
+          <li><strong>Base légale :</strong> intérêt légitime (article 6.1.f du RGPD).</li>
+        </ul>
+
+        <p class="mt-4">
+          Vos données ne sont ni vendues, ni louées, ni utilisées pour du profilage ou de la prise de
+          décision automatisée.
         </p>
       </div>
 
       <div>
-        <h2 class="text-xl font-semibold text-white">4. Base légale du traitement</h2>
+        <h2 class="text-xl font-semibold text-white">4. Destinataires et sous-traitants</h2>
         <p class="mt-2">
-          Le traitement de vos données repose sur votre consentement, exprimé en soumettant le
-          formulaire de contact.
+          Vos données sont destinées aux seules personnes habilitées de Cœur-Net. Pour faire
+          fonctionner le site, nous faisons appel aux sous-traitants suivants, qui ne traitent vos
+          données que sur nos instructions :
+        </p>
+        <ul class="mt-2 list-disc pl-5 space-y-1">
+          <li><strong>GitHub, Inc.</strong> (88 Colin P. Kelly Jr Street, San Francisco, CA 94107, États-Unis) : hébergement du site (GitHub Pages) ;</li>
+          <li><strong>Web3Forms</strong> : transmission par e-mail des messages envoyés via le formulaire de contact ;</li>
+          <li><strong>Formspree, Inc.</strong> (États-Unis) : collecte des inscriptions à la newsletter.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-white">5. Transferts hors de l'Union européenne</h2>
+        <p class="mt-2">
+          Certains de ces sous-traitants sont établis aux États-Unis. Les transferts correspondants
+          sont encadrés par les garanties prévues au chapitre V du RGPD : décision d'adéquation de la
+          Commission européenne (EU-US Data Privacy Framework) pour les sociétés certifiées, ou, à
+          défaut, clauses contractuelles types adoptées par la Commission européenne. Vous pouvez
+          obtenir une copie de ces garanties en contactant notre DPO.
         </p>
       </div>
 
       <div>
-        <h2 class="text-xl font-semibold text-white">5. Durée de conservation</h2>
-        <p class="mt-2">
-          Les données issues du formulaire de contact sont conservées pendant 12 mois, puis
-          automatiquement supprimées.
-        </p>
-      </div>
-
-      <div>
-        <h2 class="text-xl font-semibold text-white">6. Hébergement des données</h2>
-        <p class="mt-2">Le site Cœur Net est hébergé par :</p>
-        <p class="mt-2">
-          GitHub, Inc.<br />
-          88 Colin P. Kelly Jr Street, San Francisco, CA 94107, États-Unis<br />
-          Téléphone : +1 877 448 4820
-        </p>
-        <p class="mt-2">
-          Certaines données techniques (logs, adresses IP, etc.) peuvent transiter via les
-          serveurs de cet hébergeur. GitHub applique des mesures de sécurité conformes aux
-          standards internationaux pour la protection des données.
-        </p>
+        <h2 class="text-xl font-semibold text-white">6. Durées de conservation</h2>
+        <ul class="mt-2 list-disc pl-5 space-y-1">
+          <li><strong>Demandes de contact :</strong> 12 mois à compter du dernier échange, puis suppression ; en cas de relation contractuelle, les données sont conservées pendant la durée du contrat puis archivées pendant les durées de prescription légales.</li>
+          <li><strong>Newsletter :</strong> jusqu'à votre désinscription, puis suppression sous 30 jours.</li>
+          <li><strong>Journaux techniques :</strong> selon la politique de conservation de l'hébergeur, à des fins de sécurité uniquement.</li>
+        </ul>
       </div>
 
       <div>
         <h2 class="text-xl font-semibold text-white">7. Vos droits</h2>
-        <p class="mt-2">
-          Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi
-          « Informatique et Libertés », vous disposez des droits suivants :
-        </p>
+        <p class="mt-2">Vous disposez des droits suivants sur vos données :</p>
         <ul class="mt-2 list-disc pl-5 space-y-1">
-          <li>Droit d'accès à vos données,</li>
-          <li>Droit de rectification ou d'effacement,</li>
-          <li>Droit d'opposition au traitement,</li>
-          <li>Droit à la limitation du traitement,</li>
-          <li>Droit à la portabilité des données.</li>
+          <li>droit d'accès (article 15 du RGPD) ;</li>
+          <li>droit de rectification (article 16) ;</li>
+          <li>droit à l'effacement (article 17) ;</li>
+          <li>droit à la limitation du traitement (article 18) ;</li>
+          <li>droit à la portabilité (article 20) ;</li>
+          <li>droit d'opposition (article 21) ;</li>
+          <li>droit de retirer votre consentement à tout moment, pour les traitements qui reposent sur celui-ci ;</li>
+          <li>droit de définir des directives relatives au sort de vos données après votre décès.</li>
         </ul>
         <p class="mt-2">
-          Pour exercer ces droits, contactez-nous à l'adresse suivante :
-          <a href="mailto:contact@coeur-net.fr" class="text-accent-500 hover:underline">contact@coeur-net.fr</a>.
-          Une réponse vous sera adressée dans un délai maximum d'un mois.
+          Pour les exercer, contactez notre DPO aux coordonnées indiquées à l'article 2. En cas de
+          doute raisonnable sur votre identité, un justificatif pourra vous être demandé. Nous vous
+          répondons dans un délai d'un mois à compter de la réception de votre demande ; ce délai
+          peut être prolongé de deux mois en raison de la complexité ou du nombre de demandes,
+          auquel cas vous en serez informé dans le premier mois.
         </p>
       </div>
 
       <div>
         <h2 class="text-xl font-semibold text-white">8. Sécurité des données</h2>
         <p class="mt-2">
-          Cœur Net met en œuvre toutes les mesures techniques et organisationnelles nécessaires
-          pour assurer la sécurité et la confidentialité des données personnelles traitées.
+          Cœur-Net met en œuvre des mesures techniques et organisationnelles adaptées pour protéger
+          vos données : site statique servi exclusivement en HTTPS, aucun stockage de données sur
+          votre navigateur, protection anti-spam des formulaires, accès aux messages réservé aux
+          personnes habilitées et protégé par une authentification forte.
         </p>
       </div>
 
       <div>
-        <h2 class="text-xl font-semibold text-white">9. Cookies</h2>
+        <h2 class="text-xl font-semibold text-white">9. Cookies et traceurs</h2>
         <p class="mt-2">
-          Le site Cœur Net n'utilise aucun cookie de suivi, de mesure d'audience ou à des fins
-          publicitaires. Seuls des cookies strictement techniques et temporaires peuvent être
-          utilisés afin d'assurer le bon fonctionnement du site.
+          Ce site ne dépose <strong class="text-white">aucun cookie ni autre traceur</strong> sur votre terminal
+          (ni mesure d'audience, ni publicité, ni réseaux sociaux, ni stockage local du navigateur)
+          et ne charge aucun service tiers lors de la navigation. Aucun consentement n'étant requis,
+          aucun bandeau cookies n'est affiché.
+        </p>
+        <p class="mt-2">
+          Si cette situation venait à changer, la présente politique serait mise à jour et votre
+          consentement serait recueilli au préalable lorsque la réglementation l'exige.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-white">10. Réclamation auprès de la CNIL</h2>
+        <p class="mt-2">
+          Si vous estimez, après nous avoir contactés, que vos droits ne sont pas respectés, vous
+          pouvez introduire une réclamation auprès de la Commission nationale de l'informatique et
+          des libertés (CNIL), 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07 –
+          <a href="https://www.cnil.fr" class={linkClass} rel="noopener">www.cnil.fr</a>.
         </p>
       </div>
     </div>
